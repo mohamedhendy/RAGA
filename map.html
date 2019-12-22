@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marker Clustering</title>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/slick.css">
+    <link rel="stylesheet" href="./style/slick-theme.css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Fjalla+One"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/main.css">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+          height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+        .bigcord{
+          width: 200px;
+          background-color: transparent;
+        }
+        .item1 {
+          background-color: #FFF;
+          padding: 6px 10px;
+          margin: 6px 0;
+        }
+        .item1:hover {
+          cursor: pointer;
+        }
+        .headbox {
+          overflow: hidden;
+        }
+        .downbox {
+          display: none;
+        }
+        .down1{
+          overflow: hidden;
+        }
+        .down1 i {
+          float: left;
+          padding: 4px 8px;
+        }
+        .down1 p {
+          float: left;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        .down1 span {
+          font-size: 13px;
+          padding: 3px 10px;
+        }
+        .headbox h5 {
+          font-weight: bold;
+          float: left;
+          font-size: 18px;
+        }
+        .headbox i {
+          float: right;
+        }
+        .bigcord {
+          position : absolute;
+          top: 60px;
+          left: 30px;
+        }
+        .active {
+          display: block !important;
+        }
+        .headbox  i{
+          padding: 7px 0;
+        }
+        a {
+          display: block;
+          text-decoration: none;
+          color: #000 !important;
+        }
+        a:hover {
+          text-decoration: none;
+        }
+        
+        </style>
+    
+  </head>
+  <body>
+    <div id="map"></div>
+    <div class="bigcord">
+      <div class="item1">
+
+        <div class="headbox">
+          <h5 class="float-left">Essentials </h5><i class="fas fa-angle-down float-right"></i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="downbox slup">
+          <a class="down1">
+              <i class="fas fa-university"></i><p>Bank/ATM</p><div class="clearfix"></div><span>None In This Area</span>
+          </a>
+          <a class="down1">
+              <i class="fas fa-hospital"></i><p>Hospital</p><div class="clearfix"></div><span>Raja Medical College</span>
+          </a>
+          <a class="down1">
+              <i class="fas fa-school"></i></i><p>Schools</p><div class="clearfix"></div><span>Bethel inidia Mission School</span>
+          </a>
+        </div>
+      </div>
+      <div class="item1">
+        <div class="headbox">
+          <h5 class="float-left">Amenities </h5><i class="fas fa-angle-down float-right"></i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="downbox slup">
+          <a class="down1" href="javascript:google.maps.event.trigger(gmarkers[4],'click');">
+              <i class="fas fa-university"></i><p>Air Port</p><div class="clearfix"></div><span>None In This Area</span>
+          </a>
+          <a class="down1">
+              <i class="fas fa-hospital"></i><p>Hospital</p><div class="clearfix"></div><span>Raja Medical College</span>
+          </a>
+          <a class="down1">
+              <i class="fas fa-school"></i></i><p>Schools</p><div class="clearfix"></div><span>Bethel inidia Mission School</span>
+          </a>
+        </div>
+      </div>
+      <div class="item1">
+        <a class="headbox">
+          <h5>Entertainment</h5><i class="fas fa-angle-down float-right"></i>
+        </a>
+        <div class="clearfix"></div>
+        <div class="downbox slup">
+          <a class="down1" href="javascript:google.maps.event.trigger(gmarkers[2],'click');">
+              <i class="fas fa-graduation-cap" ></i></i><p>College 1</p><div class="clearfix"></div><span>None In This Area</span>
+          </a>
+          <a class="down1" href="javascript:google.maps.event.trigger(gmarkers[3],'click');">
+              <i class="fas fa-graduation-cap"></i><p>College 2</p><div class="clearfix"></div><span>Raja Medical College</span>
+          </a>
+        </div>
+      </div>
+      <div class="item1">
+        <div class="headbox">
+          <h5>Commute</h5><i class="fas fa-angle-down float-right"></i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="downbox slup">
+          <a class="down1 " href="javascript:google.maps.event.trigger(gmarkers[0],'click');">
+              <i class="fas fa-bus"></i><p>Bus Stop 1</p><div class="clearfix"></div><span>In this area</span>
+          </a>
+          <a class="down1" href="javascript:google.maps.event.trigger(gmarkers[1],'click');">
+              <i class="fas fa-bus"></i><p>Bus Stop 2</p><div class="clearfix"></div><span>In this area</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/placesdata.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAevmVUj5U9-ZwVxA1p5vOPOhKMOKvZb_k&callback=initMap"
+    type="text/javascript">
+    </script>
+    <script>
+
+      // custom functions
+      var gmarkers = [];
+      var locations =[]
+      for(var i=0; i < dataItem.length; i++)  {
+        locations.push(dataItem[i])
+      }
+      window.onload = function () {
+          LoadMap();
+      }
+      function LoadMap() {
+        
+          var mapOptions = {
+              center: new google.maps.LatLng(locations[0].lat, locations[0].lng),
+              zoom: 15,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  
+          //Create and open InfoWindow.
+          var infoWindow = new google.maps.InfoWindow();
+  
+          for (var i = 0; i < locations.length; i++) {
+              var data = locations[i];
+              var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  map: map,
+                  title: data.title,
+                  
+              });
+              gmarkers.push(marker);    
+              //Attach click event to the marker.
+              (function (marker, data) {
+                  google.maps.event.addListener(marker, "click", function (e) {
+                      //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                      infoWindow.setContent("<div style = 'width:200px;min-height:40px;font-weight:bold;text-align:center;'>" + data.title +"<br>"+ data.distance +"<br>"+ data.time +"</div>");
+                      infoWindow.open(map, marker);
+                  });
+              })(marker, data);
+          }
+          
+      }
+      
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    
+
+
+
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+                  $('.item1').click(function () {
+                  $(this).siblings('.item1').find('.downbox').slideUp();  
+                  $(this).find('.downbox').slideToggle().siblings('.headbox').find('i').css('transform',' rotate(90deg)');
+                  if ($('.downbox').style.display = 'none'){
+                    $('i').css('transform',' rotate(90deg)');
+                  }
+                });
+              });
+        
+    </script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
+
+
+
